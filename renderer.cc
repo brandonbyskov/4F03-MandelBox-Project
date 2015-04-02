@@ -61,31 +61,31 @@ void renderFractal(const CameraParams &camera_params, const RenderParams &render
     {
       //for each column pixel in the row
       for(int i = 0; i <width; i++)
-	{
-	  vec3 color;
-	  if( renderer_params.super_sampling == 1 )
-	    {
-	      int idx = 0;
-	      for(int ssj = -1; ssj < 2; ssj++){
-		for(int ssi = -1; ssi< 2; ssi++){
-		  UnProject(i+ssi*0.5, j+ssj*0.5, camera_params, farPoint);
-		  
-		  // to = farPoint - camera_params.camPos
-		  to = SubtractDoubleDouble(farPoint,camera_params.camPos);
-		  to.Normalize();
-		  
-		  //render the pixel
-		  rayMarch(renderer_params, from, to, pix_data);
-		  
-		  //get the colour at this pixel
-		  samples[idx] = getColour(pix_data, renderer_params, from, to);
-		  idx++;
-		}
-	      }
-	      color = (samples[0]*0.05 + samples[1]*0.1 + samples[2]*0.05 + 
-		       samples[3]*0.1  + samples[4]*0.4 + samples[5]*0.1  + 
-		       samples[6]*0.05 + samples[7]*0.1 + samples[8]*0.05);
-	      
+		{
+		  vec3 color;
+		  if( renderer_params.super_sampling == 1 )
+		    {
+		      int idx = 0;
+		      for(int ssj = -1; ssj < 2; ssj++){
+				for(int ssi = -1; ssi< 2; ssi++){
+				  UnProject(i+ssi*0.5, j+ssj*0.5, camera_params, farPoint);
+				  
+				  // to = farPoint - camera_params.camPos
+				  to = SubtractDoubleDouble(farPoint,camera_params.camPos);
+				  to.Normalize();
+				  
+				  //render the pixel
+				  rayMarch(renderer_params, from, to, pix_data);
+				  
+				  //get the colour at this pixel
+				  samples[idx] = getColour(pix_data, renderer_params, from, to);
+				  idx++;
+				}
+		      }
+		      color = (samples[0]*0.05 + samples[1]*0.1 + samples[2]*0.05 + 
+			       samples[3]*0.1  + samples[4]*0.4 + samples[5]*0.1  + 
+			       samples[6]*0.05 + samples[7]*0.1 + samples[8]*0.05);
+		      
 	    }
 	  else
 	    {
