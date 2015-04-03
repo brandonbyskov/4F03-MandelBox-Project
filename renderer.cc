@@ -36,7 +36,7 @@ extern "C"{
 
 extern void rayMarch (const RenderParams &render_params, const vec3 &from, const vec3  &to, pixelData &pix_data);
 extern vec3 getColour(const pixelData &pixData, const RenderParams &render_params,
-					const vec3 &from, const vec3  &direction);
+											const vec3 &from, const vec3  &direction);
 
 void renderFractal(const CameraParams &camera_params, const RenderParams &renderer_params, 
 					unsigned char* image)
@@ -75,12 +75,11 @@ void renderFractal(const CameraParams &camera_params, const RenderParams &render
 				{
 					int idx = 0;
 					for(int ssj = -1; ssj < 2; ssj++){
-					}
 						color = (samples[0]*0.05 + samples[1]*0.1 + samples[2]*0.05 + 
 						samples[3]*0.1  + samples[4]*0.4 + samples[5]*0.1  + 
 						samples[6]*0.05 + samples[7]*0.1 + samples[8]*0.05);
-
 					}
+				}
 				else
 				{
 					// get point on the 'far' plane
@@ -103,11 +102,10 @@ void renderFractal(const CameraParams &camera_params, const RenderParams &render
 				image[k+2] = (unsigned char)(color.x * 255);
 				image[k+1] = (unsigned char)(color.y * 255);
 				image[k]   = (unsigned char)(color.z * 255);
-				}
+			}
 			if (tid == 0)
 				printProgress((j+1)/(double)height,getTime()-time);
 		}
-
 
 		if( renderer_params.super_sampling == 1 )
 		free(samples);
