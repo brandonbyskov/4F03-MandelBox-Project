@@ -5,8 +5,8 @@
 # CXX=icc
 # CC =icc
 # to compile with gcc
-CXX=gcc
-CC =g++
+CXX=g++
+CC =gcc
 
 CFLAGS= -O3 -fopenmp
 CXXFLAGS= -O3 -fopenmp
