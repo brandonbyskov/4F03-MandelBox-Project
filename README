@@ -1,0 +1,31 @@
+README
+----------------------
+
+
+to set the number of threads on your computer, use
+> export OMP_NUM_THREADS=X
+where X = 1,2,..,32
+Use 32 threads on the school computers, GPU1 and GPU2.
+
+Timing Runtime
+----------------------
+Whenever you want to try an optimization, test whether it actually improves performance.
+Don't commit anything and rearrange the code unless it actually improves the runtime.
+"Real Time" is the actually time that the program takes to run. 
+
+Test before and after the changes using:
+On linux:
+> time ./mandelbox params.exe
+On Windows
+> Measure-Command {mandelbox.exe params.dat}
+
+Verify Correct Image
+----------------------
+To verify that the changes are still outputting the correct image, compare it with
+the original image we got with unedited code:
+> cmp image.bmp base.bmp
+output should be nothing if images are the same, the difference if they are different.
+
+If you are optimizing certain floating point operations, there could be cases where
+the output image is not exactly the same, but very close. If this is the case, visually
+inspect the image.
