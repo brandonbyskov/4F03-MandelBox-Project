@@ -31,8 +31,7 @@
 extern double DE(const vec3 &p);
 void normal (const vec3 & p, vec3 & normal);
 
-void rayMarch(const RenderParams &render_params, const vec3 &from, const vec3  &direction,
-	      pixelData& pix_data)
+void rayMarch(const RenderParams &render_params, const vec3 &from, const vec3  &direction, pixelData& pix_data)
 {
   double dist = 0.0;
   double totalDist = 0.0;
@@ -43,30 +42,69 @@ void rayMarch(const RenderParams &render_params, const vec3 &from, const vec3  &
   
   int steps;
   vec3 p;
+
+  //TODO: Can be unrolled
   for ( steps = 0; steps < render_params.maxRaySteps; steps++) 
-    {      
-      p = from + direction * totalDist;
-      dist = DE(p);
-      totalDist += 0.9*dist;
-      
-      epsModified = totalDist*eps;
-      if (dist < epsModified || totalDist > render_params.maxDistance) 
-	break;
-    }
+  {      
+    p = from + direction * totalDist;
+    dist = DE(p);
+    totalDist += 0.9*dist;
+    
+    epsModified = totalDist*eps;
+    if (dist < epsModified || totalDist > render_params.maxDistance) 
+      break;
+  }
+
+
+  //Modified for loop
+  // for ( steps = 0; steps < render_params.maxRaySteps; steps+=4) 
+  // {      
+  //   p = from + direction * totalDist;
+  //   dist = DE(p);
+  //   totalDist += 0.9*dist;
+    
+  //   epsModified = totalDist*eps;
+  //   if (dist < epsModified || totalDist > render_params.maxDistance) 
+  //     break;
+
+  //   p = from + direction * totalDist;
+  //   dist = DE(p);
+  //   totalDist += 0.9*dist;
+    
+  //   epsModified = totalDist*eps;
+  //   if (dist < epsModified || totalDist > render_params.maxDistance) 
+  //     break;
+
+  //   p = from + direction * totalDist;
+  //   dist = DE(p);
+  //   totalDist += 0.9*dist;
+    
+  //   epsModified = totalDist*eps;
+  //   if (dist < epsModified || totalDist > render_params.maxDistance) 
+  //     break;
+
+  //   p = from + direction * totalDist;
+  //   dist = DE(p);
+  //   totalDist += 0.9*dist;
+    
+  //   epsModified = totalDist*eps;
+  //   if (dist < epsModified || totalDist > render_params.maxDistance) 
+  //     break;
+  // }
   
   vec3 hitNormal;
   if (dist < epsModified) 
-    {
-      //we didnt escape
-      pix_data.escaped = false;
-      
-      // We hit something, or reached MaxRaySteps
-      pix_data.hit = p;
-      
-      //figure out the normal of the surface at this point
-      vec3 normPos = p - direction * epsModified;
-      normal(normPos, pix_data.normal);
-    }
+  {
+    //we didnt escape
+    pix_data.escaped = false;
+    
+    // We hit something, or reached MaxRaySteps
+    pix_data.hit = p;
+    
+    //figure out the normal of the surface at this point
+    vec3 normPos = p - direction * epsModified;
+    normal(normPos, pix_data.normal);
+  }
   else 
     //we have the background colour
     pix_data.escaped = true;

@@ -74,11 +74,25 @@ void renderFractal(const CameraParams &camera_params, const RenderParams &render
 				if( renderer_params.super_sampling == 1 )
 				{
 					int idx = 0;
+					//TODO: Can be unrolled
 					for(int ssj = -1; ssj < 2; ssj++){
 						color = (samples[0]*0.05 + samples[1]*0.1 + samples[2]*0.05 + 
 						samples[3]*0.1  + samples[4]*0.4 + samples[5]*0.1  + 
 						samples[6]*0.05 + samples[7]*0.1 + samples[8]*0.05);
 					}
+
+					
+					// color = (samples[0]*0.05 + samples[1]*0.1 + samples[2]*0.05 + 
+					// samples[3]*0.1  + samples[4]*0.4 + samples[5]*0.1  + 
+					// samples[6]*0.05 + samples[7]*0.1 + samples[8]*0.05);
+
+					// color = (samples[0]*0.05 + samples[1]*0.1 + samples[2]*0.05 + 
+					// samples[3]*0.1  + samples[4]*0.4 + samples[5]*0.1  + 
+					// samples[6]*0.05 + samples[7]*0.1 + samples[8]*0.05);
+
+					// color = (samples[0]*0.05 + samples[1]*0.1 + samples[2]*0.05 + 
+					// samples[3]*0.1  + samples[4]*0.4 + samples[5]*0.1  + 
+					// samples[6]*0.05 + samples[7]*0.1 + samples[8]*0.05);
 				}
 				else
 				{
@@ -108,7 +122,7 @@ void renderFractal(const CameraParams &camera_params, const RenderParams &render
 		}
 
 		if( renderer_params.super_sampling == 1 )
-		free(samples);
+			free(samples);
 	}
 	printf("\n rendering done:\n");
 }

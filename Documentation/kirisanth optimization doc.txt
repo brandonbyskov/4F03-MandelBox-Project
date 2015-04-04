@@ -6,4 +6,6 @@ renderer.cc -> raymarching.cc -> mendelboxde.cc
 Loop Unrolling
 Reduce total number of interations on a for loop and do those iterations that is being eliminated inline in the for loop
 https://cs.brown.edu/courses/cs033/docs/guides/c_optimization_notes.pdf page 2
+http://stackoverflow.com/questions/2349211/when-if-ever-is-loop-unrolling-still-useful
 
+check raymarching.cc
