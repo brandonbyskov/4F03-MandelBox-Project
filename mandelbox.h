@@ -25,9 +25,12 @@
 
 typedef struct {
   float rMin, rFixed;
-  float scale;
+  float scale, fabs_scale;
   float escape_time;
   int num_iter;
+  double rMin2, rFixed2, escape;
+  double c1, c2;
+  double scale1_a, scale1_b;
 } MandelBoxParams;
 
 #endif

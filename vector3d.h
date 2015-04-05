@@ -81,6 +81,28 @@ public:
     y -= V2.y;
     z -= V2.z;
   }
+  // inline void operator*= ( const vec3& V2 )
+  // {
+  //   x *= V2.x;
+  //   y *= V2.y;
+  //   z *= V2.z;
+  // }
+  inline void operator*= ( const double S )
+  {
+    x *= S;
+    y *= S;
+    z *= S;
+  }
+  inline void FMA(double S, const vec3& V2 )
+  {
+    x = x*S + V2.x;
+    //x+=V2.x;
+    y = y*S + V2.y;
+    //y+=V2.y;
+    z = z*S + V2.z;
+    //z+=V2.z;
+    return;
+  }
   
   inline double operator[] ( int i )
   {
@@ -96,7 +118,7 @@ public:
   }
   
   // These require math.h for the sqrt function
-  double Magnitude( ) const
+  inline double Magnitude( ) const
   {
     return sqrt( x*x + y*y + z*z );
   }
@@ -121,11 +143,12 @@ inline vec3 SubtractDoubleDouble(const double *d1, const double *d2)
 
 inline double clamp(double d, double min, double max)
 {
-  if (d < min)
-    return min;
-  if (d > max)
-    return max;
-  return d;
+  // if (d < min)
+  //   return min;
+  // if (d > max)
+  //   return max;
+  // return d;
+  return (d < min)?min:(d>max)?max:d;
 }
 
 inline void clamp(vec3 &v, double min, double max) 

@@ -26,18 +26,19 @@
 #include "color.h"
 #include "renderer.h"
 
+extern RenderParams renderer_params;
+RenderParams& render_params = renderer_params;
 
+extern double MandelBoxDE(const vec3 &p);
+inline void normal (const vec3 & p, vec3 & normal);
 
-extern double DE(const vec3 &p);
-void normal (const vec3 & p, vec3 & normal);
-
-void rayMarch(const RenderParams &render_params, const vec3 &from, const vec3  &direction, pixelData& pix_data)
+void rayMarch(const vec3 &from, const vec3  &direction, pixelData& pix_data)
 {
   double dist = 0.0;
   double totalDist = 0.0;
   
   // We will adjust the minimum distance based on the current zoom
-  double eps = pow((float)10.0, render_params.detail); 
+  double eps = render_params.eps;
   double epsModified = 0.0;
   
   int steps;
@@ -46,7 +47,7 @@ void rayMarch(const RenderParams &render_params, const vec3 &from, const vec3  &
   for (steps = 0; steps < render_params.maxRaySteps; steps++) 
   {      
     p = from + direction * totalDist;
-    dist = DE(p);
+    dist = MandelBoxDE(p);
     totalDist += 0.9*dist;
     
     epsModified = totalDist*eps;
@@ -54,7 +55,7 @@ void rayMarch(const RenderParams &render_params, const vec3 &from, const vec3  &
       break;
   }
   
-  vec3 hitNormal;
+  //vec3 hitNormal;
   if (dist < epsModified) 
   {
     //we didnt escape
@@ -84,7 +85,7 @@ void normal(const vec3 & p, vec3 & normal)
   vec3 e2(0  , eps, 0);
   vec3 e3(0  , 0, eps);
   
-  normal = vec3(DE(p+e1)-DE(p-e1), DE(p+e2)-DE(p-e2), DE(p+e3)-DE(p-e3));
+  normal = vec3(MandelBoxDE(p+e1)-MandelBoxDE(p-e1), MandelBoxDE(p+e2)-MandelBoxDE(p-e2), MandelBoxDE(p+e3)-MandelBoxDE(p-e3));
   
   normal.Normalize();
 }

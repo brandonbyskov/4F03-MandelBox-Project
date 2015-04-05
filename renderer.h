@@ -34,6 +34,7 @@ typedef struct
   int maxRaySteps;
   float maxDistance;
   char file_name[80];
+  double eps;
 } RenderParams;
 
 #endif

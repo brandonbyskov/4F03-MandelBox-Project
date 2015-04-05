@@ -34,7 +34,7 @@ extern "C"{
 
 }
 
-extern void rayMarch (const RenderParams &render_params, const vec3 &from, const vec3  &to, pixelData &pix_data);
+extern void rayMarch (const vec3 &from, const vec3  &to, pixelData &pix_data);
 extern vec3 getColour(const pixelData &pixData, const RenderParams &render_params,
 											const vec3 &from, const vec3  &direction);
 
@@ -84,7 +84,7 @@ void renderFractal(const CameraParams &camera_params, const RenderParams &render
 						// 	to.Normalize();
 
 						// 	//render the pixel
-						// 	rayMarch(renderer_params, from, to, pix_data);
+						// 	rayMarch(from, to, pix_data);
 
 						// 	//get the colour at this pixel
 						// 	samples[idx] = getColour(pix_data, renderer_params, from, to);
@@ -102,7 +102,7 @@ void renderFractal(const CameraParams &camera_params, const RenderParams &render
 					to = SubtractDoubleDouble(farPoint,camera_params.camPos);
 					to.Normalize();
 					//render the pixel
-					rayMarch(renderer_params, from, to, pix_data);
+					rayMarch(from, to, pix_data);
 					//get the colour at this pixel
 					samples[idx] = getColour(pix_data, renderer_params, from, to);
 					idx++;
@@ -113,7 +113,7 @@ void renderFractal(const CameraParams &camera_params, const RenderParams &render
 					to = SubtractDoubleDouble(farPoint,camera_params.camPos);
 					to.Normalize();
 					//render the pixel
-					rayMarch(renderer_params, from, to, pix_data);
+					rayMarch(from, to, pix_data);
 					//get the colour at this pixel
 					samples[idx] = getColour(pix_data, renderer_params, from, to);
 					idx++;
@@ -124,7 +124,7 @@ void renderFractal(const CameraParams &camera_params, const RenderParams &render
 					to = SubtractDoubleDouble(farPoint,camera_params.camPos);
 					to.Normalize();
 					//render the pixel
-					rayMarch(renderer_params, from, to, pix_data);
+					rayMarch(from, to, pix_data);
 					//get the colour at this pixel
 					samples[idx] = getColour(pix_data, renderer_params, from, to);
 					idx++;
@@ -142,7 +142,7 @@ void renderFractal(const CameraParams &camera_params, const RenderParams &render
 					to = SubtractDoubleDouble(farPoint,camera_params.camPos);
 					to.Normalize();
 					//render the pixel
-					rayMarch(renderer_params, from, to, pix_data);
+					rayMarch(from, to, pix_data);
 					//get the colour at this pixel
 					samples[idx] = getColour(pix_data, renderer_params, from, to);
 					idx++;
@@ -153,7 +153,7 @@ void renderFractal(const CameraParams &camera_params, const RenderParams &render
 					to = SubtractDoubleDouble(farPoint,camera_params.camPos);
 					to.Normalize();
 					//render the pixel
-					rayMarch(renderer_params, from, to, pix_data);
+					rayMarch(from, to, pix_data);
 					//get the colour at this pixel
 					samples[idx] = getColour(pix_data, renderer_params, from, to);
 					idx++;
@@ -164,7 +164,7 @@ void renderFractal(const CameraParams &camera_params, const RenderParams &render
 					to = SubtractDoubleDouble(farPoint,camera_params.camPos);
 					to.Normalize();
 					//render the pixel
-					rayMarch(renderer_params, from, to, pix_data);
+					rayMarch(from, to, pix_data);
 					//get the colour at this pixel
 					samples[idx] = getColour(pix_data, renderer_params, from, to);
 					idx++;
@@ -179,7 +179,7 @@ void renderFractal(const CameraParams &camera_params, const RenderParams &render
 					to = SubtractDoubleDouble(farPoint,camera_params.camPos);
 					to.Normalize();
 					//render the pixel
-					rayMarch(renderer_params, from, to, pix_data);
+					rayMarch(from, to, pix_data);
 					//get the colour at this pixel
 					samples[idx] = getColour(pix_data, renderer_params, from, to);
 					idx++;
@@ -190,7 +190,7 @@ void renderFractal(const CameraParams &camera_params, const RenderParams &render
 					to = SubtractDoubleDouble(farPoint,camera_params.camPos);
 					to.Normalize();
 					//render the pixel
-					rayMarch(renderer_params, from, to, pix_data);
+					rayMarch(from, to, pix_data);
 					//get the colour at this pixel
 					samples[idx] = getColour(pix_data, renderer_params, from, to);
 					idx++;
@@ -201,7 +201,7 @@ void renderFractal(const CameraParams &camera_params, const RenderParams &render
 					to = SubtractDoubleDouble(farPoint,camera_params.camPos);
 					to.Normalize();
 					//render the pixel
-					rayMarch(renderer_params, from, to, pix_data);
+					rayMarch(from, to, pix_data);
 					//get the colour at this pixel
 					samples[idx] = getColour(pix_data, renderer_params, from, to);
 					idx++;
@@ -229,7 +229,7 @@ void renderFractal(const CameraParams &camera_params, const RenderParams &render
 					to.Normalize();
 
 					//render the pixel
-					rayMarch(renderer_params, from, to, pix_data);
+					rayMarch(from, to, pix_data);
 
 					//get the colour at this pixel
 					color = getColour(pix_data, renderer_params, from, to);
@@ -248,5 +248,5 @@ void renderFractal(const CameraParams &camera_params, const RenderParams &render
 		if(isSuperSamplingOn)
 			free(samples);
 	}
-	printf("\n rendering done:\n");
+	printf("rendering done\n");
 }
