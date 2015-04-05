@@ -1,0 +1,9 @@
+renderer.cc
+
+unrolled nested for loop
+// for(int ssj = -1; ssj < 2; ssj++){
+	// for(int ssi = -1; ssi< 2; ssi++){
+
+
+replaced renderer_params.super_sampling == 1 with a variable in the if statements that they are found in
+

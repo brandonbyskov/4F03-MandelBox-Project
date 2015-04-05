@@ -55,10 +55,11 @@ void renderFractal(const CameraParams &camera_params, const RenderParams &render
 
 	#pragma omp parallel
 	{
+		bool isSuperSamplingOn = renderer_params.super_sampling == 1;
 		vec3 to;
 		vec3 *samples;
 		pixelData pix_data;
-		if( renderer_params.super_sampling == 1 )
+		if(isSuperSamplingOn)
 			samples = (vec3*)malloc(sizeof(vec3)*9);
 		double time = getTime();
 		int i, j;
@@ -71,28 +72,150 @@ void renderFractal(const CameraParams &camera_params, const RenderParams &render
 			for(int i = 0; i <width; i++)
 			{
 				vec3 color;
-				if( renderer_params.super_sampling == 1 )
+				if(isSuperSamplingOn)
 				{
 					int idx = 0;
-					for(int ssj = -1; ssj < 2; ssj++){
-						for(int ssi = -1; ssi< 2; ssi++){
-						UnProject(i+ssi*0.5, j+ssj*0.5, camera_params, farPoint);
+					// for(int ssj = -1; ssj < 2; ssj++){
+						// for(int ssi = -1; ssi< 2; ssi++){
+						// 	UnProject(i+ssi*0.5, j+ssj*0.5, camera_params, farPoint);
 
-						// to = farPoint - camera_params.camPos
-						to = SubtractDoubleDouble(farPoint,camera_params.camPos);
-						to.Normalize();
+						// 	// to = farPoint - camera_params.camPos
+						// 	to = SubtractDoubleDouble(farPoint,camera_params.camPos);
+						// 	to.Normalize();
 
-						//render the pixel
-						rayMarch(renderer_params, from, to, pix_data);
+						// 	//render the pixel
+						// 	rayMarch(renderer_params, from, to, pix_data);
 
-						//get the colour at this pixel
-						samples[idx] = getColour(pix_data, renderer_params, from, to);
-						idx++;
-					}
-				}
-				color = (samples[0]*0.05 + samples[1]*0.1 + samples[2]*0.05 + 
-									samples[3]*0.1  + samples[4]*0.4 + samples[5]*0.1  + 
-									samples[6]*0.05 + samples[7]*0.1 + samples[8]*0.05);
+						// 	//get the colour at this pixel
+						// 	samples[idx] = getColour(pix_data, renderer_params, from, to);
+						// 	idx++;
+						// }
+					// }
+
+
+					int ssj = -1;
+
+					int ssi = -1;
+
+					UnProject(i+ssi*0.5, j+ssj*0.5, camera_params, farPoint);
+					// to = farPoint - camera_params.camPos
+					to = SubtractDoubleDouble(farPoint,camera_params.camPos);
+					to.Normalize();
+					//render the pixel
+					rayMarch(renderer_params, from, to, pix_data);
+					//get the colour at this pixel
+					samples[idx] = getColour(pix_data, renderer_params, from, to);
+					idx++;
+					ssi++;
+
+					UnProject(i+ssi*0.5, j+ssj*0.5, camera_params, farPoint);
+					// to = farPoint - camera_params.camPos
+					to = SubtractDoubleDouble(farPoint,camera_params.camPos);
+					to.Normalize();
+					//render the pixel
+					rayMarch(renderer_params, from, to, pix_data);
+					//get the colour at this pixel
+					samples[idx] = getColour(pix_data, renderer_params, from, to);
+					idx++;
+					ssi++;
+
+					UnProject(i+ssi*0.5, j+ssj*0.5, camera_params, farPoint);
+					// to = farPoint - camera_params.camPos
+					to = SubtractDoubleDouble(farPoint,camera_params.camPos);
+					to.Normalize();
+					//render the pixel
+					rayMarch(renderer_params, from, to, pix_data);
+					//get the colour at this pixel
+					samples[idx] = getColour(pix_data, renderer_params, from, to);
+					idx++;
+					ssi++;
+					ssj++;
+
+
+
+
+
+					ssi = -1;
+
+					UnProject(i+ssi*0.5, j+ssj*0.5, camera_params, farPoint);
+					// to = farPoint - camera_params.camPos
+					to = SubtractDoubleDouble(farPoint,camera_params.camPos);
+					to.Normalize();
+					//render the pixel
+					rayMarch(renderer_params, from, to, pix_data);
+					//get the colour at this pixel
+					samples[idx] = getColour(pix_data, renderer_params, from, to);
+					idx++;
+					ssi++;
+
+					UnProject(i+ssi*0.5, j+ssj*0.5, camera_params, farPoint);
+					// to = farPoint - camera_params.camPos
+					to = SubtractDoubleDouble(farPoint,camera_params.camPos);
+					to.Normalize();
+					//render the pixel
+					rayMarch(renderer_params, from, to, pix_data);
+					//get the colour at this pixel
+					samples[idx] = getColour(pix_data, renderer_params, from, to);
+					idx++;
+					ssi++;
+
+					UnProject(i+ssi*0.5, j+ssj*0.5, camera_params, farPoint);
+					// to = farPoint - camera_params.camPos
+					to = SubtractDoubleDouble(farPoint,camera_params.camPos);
+					to.Normalize();
+					//render the pixel
+					rayMarch(renderer_params, from, to, pix_data);
+					//get the colour at this pixel
+					samples[idx] = getColour(pix_data, renderer_params, from, to);
+					idx++;
+					ssi++;
+					ssj++;
+
+
+					ssi = -1;
+
+					UnProject(i+ssi*0.5, j+ssj*0.5, camera_params, farPoint);
+					// to = farPoint - camera_params.camPos
+					to = SubtractDoubleDouble(farPoint,camera_params.camPos);
+					to.Normalize();
+					//render the pixel
+					rayMarch(renderer_params, from, to, pix_data);
+					//get the colour at this pixel
+					samples[idx] = getColour(pix_data, renderer_params, from, to);
+					idx++;
+					ssi++;
+
+					UnProject(i+ssi*0.5, j+ssj*0.5, camera_params, farPoint);
+					// to = farPoint - camera_params.camPos
+					to = SubtractDoubleDouble(farPoint,camera_params.camPos);
+					to.Normalize();
+					//render the pixel
+					rayMarch(renderer_params, from, to, pix_data);
+					//get the colour at this pixel
+					samples[idx] = getColour(pix_data, renderer_params, from, to);
+					idx++;
+					ssi++;
+
+					UnProject(i+ssi*0.5, j+ssj*0.5, camera_params, farPoint);
+					// to = farPoint - camera_params.camPos
+					to = SubtractDoubleDouble(farPoint,camera_params.camPos);
+					to.Normalize();
+					//render the pixel
+					rayMarch(renderer_params, from, to, pix_data);
+					//get the colour at this pixel
+					samples[idx] = getColour(pix_data, renderer_params, from, to);
+					idx++;
+					ssi++;
+					ssj++;
+
+
+
+
+
+
+					color = (samples[0]*0.05 + samples[1]*0.1 + samples[2]*0.05 + 
+										samples[3]*0.1  + samples[4]*0.4 + samples[5]*0.1  + 
+										samples[6]*0.05 + samples[7]*0.1 + samples[8]*0.05);
 
 				}
 				else
@@ -118,12 +241,12 @@ void renderFractal(const CameraParams &camera_params, const RenderParams &render
 				image[k+1] = (unsigned char)(color.y * 255);
 				image[k]   = (unsigned char)(color.z * 255);
 			}
-			if (tid == 0)
-				printProgress((j+1)/(double)height,getTime()-time);
+			// if (tid == 0)
+			// 	printProgress((j+1)/(double)height,getTime()-time);
 		}
 
-		if( renderer_params.super_sampling == 1 )
-		free(samples);
+		if(isSuperSamplingOn)
+			free(samples);
 	}
 	printf("\n rendering done:\n");
 }

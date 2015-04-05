@@ -8,4 +8,15 @@ Reduce total number of interations on a for loop and do those iterations that is
 https://cs.brown.edu/courses/cs033/docs/guides/c_optimization_notes.pdf page 2
 http://stackoverflow.com/questions/2349211/when-if-ever-is-loop-unrolling-still-useful
 
+above is not usefull in all cases need to look more into this
+
 check raymarching.cc
+
+
+
+distance est.cc
+
+make the DE function inline
+
+
+added isSuperSamplingOn to renderer.cc file replacing the bool check in if statement

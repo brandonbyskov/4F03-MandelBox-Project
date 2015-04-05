@@ -43,8 +43,7 @@ void rayMarch(const RenderParams &render_params, const vec3 &from, const vec3  &
   int steps;
   vec3 p;
 
-  //TODO: Can be unrolled
-  for ( steps = 0; steps < render_params.maxRaySteps; steps++) 
+  for (steps = 0; steps < render_params.maxRaySteps; steps++) 
   {      
     p = from + direction * totalDist;
     dist = DE(p);
@@ -54,43 +53,6 @@ void rayMarch(const RenderParams &render_params, const vec3 &from, const vec3  &
     if (dist < epsModified || totalDist > render_params.maxDistance) 
       break;
   }
-
-
-  //Modified for loop
-  // for ( steps = 0; steps < render_params.maxRaySteps; steps+=4) 
-  // {      
-  //   p = from + direction * totalDist;
-  //   dist = DE(p);
-  //   totalDist += 0.9*dist;
-    
-  //   epsModified = totalDist*eps;
-  //   if (dist < epsModified || totalDist > render_params.maxDistance) 
-  //     break;
-
-  //   p = from + direction * totalDist;
-  //   dist = DE(p);
-  //   totalDist += 0.9*dist;
-    
-  //   epsModified = totalDist*eps;
-  //   if (dist < epsModified || totalDist > render_params.maxDistance) 
-  //     break;
-
-  //   p = from + direction * totalDist;
-  //   dist = DE(p);
-  //   totalDist += 0.9*dist;
-    
-  //   epsModified = totalDist*eps;
-  //   if (dist < epsModified || totalDist > render_params.maxDistance) 
-  //     break;
-
-  //   p = from + direction * totalDist;
-  //   dist = DE(p);
-  //   totalDist += 0.9*dist;
-    
-  //   epsModified = totalDist*eps;
-  //   if (dist < epsModified || totalDist > render_params.maxDistance) 
-  //     break;
-  // }
   
   vec3 hitNormal;
   if (dist < epsModified) 
