@@ -29,3 +29,7 @@ output should be nothing if images are the same, the difference if they are diff
 If you are optimizing certain floating point operations, there could be cases where
 the output image is not exactly the same, but very close. If this is the case, visually
 inspect the image.
+
+Compile Video
+--------------------
+ffmpeg -i f%04d.jpg -r 30 -c:v libx264 -preset slow -crf 21 output.mp4

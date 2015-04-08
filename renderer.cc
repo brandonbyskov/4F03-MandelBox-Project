@@ -248,5 +248,5 @@ void renderFractal(const CameraParams &camera_params, const RenderParams &render
 		if(isSuperSamplingOn)
 			free(samples);
 	}
-	printf("rendering done\n");
+	//printf("rendering done\n");
 }
