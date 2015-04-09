@@ -41,7 +41,7 @@ extern vec3 getColour(const pixelData &pixData, const RenderParams &render_param
 void renderFractal(const CameraParams &camera_params, const RenderParams &renderer_params, 
 					unsigned char* image)
 {
-	//printf("rendering fractal...\n");
+	printf("rendering fractal...\n");
 
 	double farPoint[3];
 	vec3 from;
@@ -125,5 +125,5 @@ void renderFractal(const CameraParams &camera_params, const RenderParams &render
 		if( renderer_params.super_sampling == 1 )
 		free(samples);
 	}
-	//printf("rendering done\n");
+	printf("rendering done\n");
 }

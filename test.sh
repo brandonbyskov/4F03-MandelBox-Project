@@ -1,12 +1,12 @@
 #!/bin/sh
 #
-echo "File Name: $0"
-echo "First Parameter : $1"
-echo "First Parameter : $2"
+#echo "File Name: $0"
+#echo "First Parameter : $1"
+#echo "First Parameter : $2"
 #
 data_params="params/params"
 data_params_ext=".dat"
-executable="./mandelbox.exe "
+executable="./mandelbox "
 z="0"
 #
 for((a=$1; a <= $2 ; a++))

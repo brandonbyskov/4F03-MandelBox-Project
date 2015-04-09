@@ -56,6 +56,7 @@ int main(int argc, char** argv)
   saveBMP(renderer_params.file_name, image, renderer_params.width, renderer_params.height);
   
   free(image);
+  printf("%s\ttime\n",renderer_params.file_name);
 
   return 0;
 }
