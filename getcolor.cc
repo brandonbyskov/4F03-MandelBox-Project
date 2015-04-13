@@ -33,6 +33,7 @@ static double CamLightMin = 0.3;// 0.48193;
 //-----------------------------------
 static const vec3 baseColor(1.0, 1.0, 1.0);
 static const vec3 backColor(0.4,0.4,0.4);
+static const vec3 offsetColor(0.25, 0.3, .6666667);
 //-----------------------------------
 
 inline void lighting(const vec3 &n, const vec3 &color, const vec3 &pos, const vec3 &direction,  vec3 &outV)
@@ -60,6 +61,14 @@ vec3 getColour(const pixelData &pixData, const RenderParams &render_params,
 	  hitColor = (hitColor + 1.0)/2.0;
 	  hitColor = hitColor*render_params.brightness;
 	  
+    hitColor += offsetColor;
+    if ( hitColor.x > 1 ) hitColor.x -= 1;
+    if ( hitColor.y > 1 ) hitColor.y -= 1;
+    if ( hitColor.z > 1 ) hitColor.z -= 1;
+
+    hitColor.z = .5*hitColor.z + .3*hitColor.x + .2*hitColor.y;
+    hitColor.x = fabs(-1*hitColor.x);
+    hitColor.y = fabs(-1*hitColor.y);
 	  //gamma correction
 	  clamp(hitColor, 0.0, 1.0);
 	  hitColor = hitColor*hitColor;

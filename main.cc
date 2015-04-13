@@ -25,6 +25,7 @@
 #include "mandelbox.h"
 #include <math.h>
 #include <cstring>
+#include <time.h>
 
 extern "C"{
 void getParameters(char *filename, CameraParams *camera_params, RenderParams *renderer_params,
@@ -44,6 +45,8 @@ int main(int argc, char** argv)
   CameraParams    camera_params;
   //RenderParams    renderer_params;
   int start, end;
+  int width, height;
+  int start_time;
   char infile [128];
   char outfile [128];
   strcpy(infile, argv[1]);
@@ -52,17 +55,21 @@ int main(int argc, char** argv)
   end = atoi(argv[4]);
   char paramsPath [128];
   char imagePath [128];
+  width = atoi(argv[5]);
+  height = atoi(argv[6]);
   int image_size;
   unsigned char *image;
   for (int i = start; i <= end; i++) {
     sprintf(paramsPath, infile, i);
     getParameters(paramsPath, &camera_params, &renderer_params, &mandelBox_params);
     renderer_params.eps = pow((float)10.0, renderer_params.detail);
+    renderer_params.width = width;
+    renderer_params.height = height;
     if (i == start) {
       image_size = renderer_params.width * renderer_params.height;
       image = (unsigned char*)malloc(3*image_size*sizeof(unsigned char));
     }
-
+    start_time = clock();
     init3D(&camera_params, &renderer_params);
     initDE(mandelBox_params);
 
@@ -71,7 +78,7 @@ int main(int argc, char** argv)
     saveBMP(imagePath, image, renderer_params.width, renderer_params.height);
     
   
-    printf("%s\ttime\n",imagePath);
+    printf("%s\t%f\n",imagePath, (clock() - start_time)/(double)CLOCKS_PER_SEC);
   }
 free(image);
 
