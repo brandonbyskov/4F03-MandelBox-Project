@@ -18,10 +18,12 @@ $(PROGRAM_NAME): main.o print.o timing.o savebmp.o getparams.o 3d.o getcolor.o d
 	#rm *.o
 
 run-serial: $(PROGRAM_NAME)
-	./$(PROGRAM_NAME)$(EXEXT) params.dat
+	export OMP_NUM_THREADS=1
+	./$(PROGRAM_NAME)$(EXEXT) params/params%04d.dat images/f%04d.bmp 0 7199 3840 2160
 
-run-test: $(PROGRAM_NAME)
-	./run.sh
+run-parallel: $(PROGRAM_NAME)
+	export OMP_NUM_THREADS=32
+	./$(PROGRAM_NAME)$(EXEXT) params/params%04d.dat images/f%04d.bmp 0 7199 3840 2160
 
 clean:
 	rm *.o $(PROGRAM_NAME)$(EXEEXT) *~
