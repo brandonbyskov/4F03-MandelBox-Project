@@ -24,6 +24,7 @@
 #include "renderer.h"
 #include "mandelbox.h"
 #include <math.h>
+#include <cstring>
 
 extern "C"{
 void getParameters(char *filename, CameraParams *camera_params, RenderParams *renderer_params,
@@ -42,21 +43,37 @@ int main(int argc, char** argv)
 {
   CameraParams    camera_params;
   //RenderParams    renderer_params;
-  
-  getParameters(argv[1], &camera_params, &renderer_params, &mandelBox_params);
-  renderer_params.eps = pow((float)10.0, renderer_params.detail);
-  int image_size = renderer_params.width * renderer_params.height;
-  unsigned char *image = (unsigned char*)malloc(3*image_size*sizeof(unsigned char));
+  int start, end;
+  char infile [128];
+  char outfile [128];
+  strcpy(infile, argv[1]);
+  strcpy(outfile, argv[2]);
+  start = atoi(argv[3]);
+  end = atoi(argv[4]);
+  char paramsPath [128];
+  char imagePath [128];
+  int image_size;
+  unsigned char *image;
+  for (int i = start; i <= end; i++) {
+    sprintf(paramsPath, infile, i);
+    getParameters(paramsPath, &camera_params, &renderer_params, &mandelBox_params);
+    renderer_params.eps = pow((float)10.0, renderer_params.detail);
+    if (i == start) {
+      image_size = renderer_params.width * renderer_params.height;
+      image = (unsigned char*)malloc(3*image_size*sizeof(unsigned char));
+    }
 
-  init3D(&camera_params, &renderer_params);
-  initDE(mandelBox_params);
+    init3D(&camera_params, &renderer_params);
+    initDE(mandelBox_params);
 
-  renderFractal(camera_params, renderer_params, image);
+    renderFractal(camera_params, renderer_params, image);
+    sprintf(imagePath, outfile, i);
+    saveBMP(imagePath, image, renderer_params.width, renderer_params.height);
+    
   
-  saveBMP(renderer_params.file_name, image, renderer_params.width, renderer_params.height);
-  
-  free(image);
-  printf("%s\ttime\n",renderer_params.file_name);
+    printf("%s\ttime\n",imagePath);
+  }
+free(image);
 
   return 0;
 }

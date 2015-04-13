@@ -2,14 +2,14 @@
 # CXX=pgCC
 # CC=pgcc
 # to compile on Sharcnet with intel compiler
- CXX=icc -O3 -fopenmp
- CC =icc -O3 -fopenmp
+# CXX=icc -O3 -fopenmp
+# CC =icc -O3 -fopenmp
 # to compile with gcc
-#CXX=g++
-#CC =gcc
+CXX=g++
+CC =gcc
 
-#CFLAGS= -O3 -funroll-loops -fopenmp
-#CXXFLAGS= -O3 -funroll-loops -fopenmp
+CFLAGS= -O3 -funroll-loops -fopenmp
+CXXFLAGS= -O3 -funroll-loops -fopenmp
 
 PROGRAM_NAME= mandelbox
 

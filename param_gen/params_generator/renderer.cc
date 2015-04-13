@@ -34,7 +34,7 @@ extern "C"{
 
 }
 
-extern void rayMarch (const vec3 &from, const vec3  &to, pixelData &pix_data);
+extern double rayMarch (const vec3 &from, const vec3  &to, pixelData &pix_data);
 extern vec3 getColour(const pixelData &pixData, const RenderParams &render_params,
 											const vec3 &from, const vec3  &direction);
 

@@ -33,7 +33,7 @@ extern double MandelBoxDE(const vec3 &p);
 inline void normal (const vec3 & p, vec3 & normal, double dist);
 
 //double eps = pow((float)10.0, render_params.detail);
-void rayMarch(const vec3 &from, const vec3  &direction,
+double rayMarch(const vec3 &from, const vec3  &direction,
 	      pixelData& pix_data)
 {
   double dist = 0.0;
@@ -73,6 +73,8 @@ void rayMarch(const vec3 &from, const vec3  &direction,
   else 
     //we have the background colour
     pix_data.escaped = true;
+
+  return totalDist;
 }
 
 const double sqrt_mach_eps = 1.4901e-08;
