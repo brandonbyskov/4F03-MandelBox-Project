@@ -46,7 +46,7 @@ int main(int argc, char** argv)
   //RenderParams    renderer_params;
   int start, end;
   int width, height;
-  int start_time;
+  clock_t start_time;
   char infile [128];
   char outfile [128];
   strcpy(infile, argv[1]);
